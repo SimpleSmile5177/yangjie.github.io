@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="杨杰的博客">
 <meta property="og:description" content="相信经常浏览网页的朋友都会发现有许多人有自己的个人网站，这个是怎么搭建的呢？笔者也是这几天摸索了一下，搭建出了自己的个人网站。有个人网站就不一样了，可以自己在上面写一些自己的笔记啥的，可以帮助我更好的学（zhuang）习（bi）。  搭建网站 要搭建网站可以参考下这篇文章，讲的挺不错的。        Hexo在多台电脑上更新提交自己的博客 如果自己的电脑不在身边，想要写文章怎么办，来看这个文章，">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-03T06:42:15.163Z">
+<meta property="og:updated_time" content="2018-08-15T10:09:37.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何搭建个人网站">
 <meta name="twitter:description" content="相信经常浏览网页的朋友都会发现有许多人有自己的个人网站，这个是怎么搭建的呢？笔者也是这几天摸索了一下，搭建出了自己的个人网站。有个人网站就不一样了，可以自己在上面写一些自己的笔记啥的，可以帮助我更好的学（zhuang）习（bi）。  搭建网站 要搭建网站可以参考下这篇文章，讲的挺不错的。        Hexo在多台电脑上更新提交自己的博客 如果自己的电脑不在身边，想要写文章怎么办，来看这个文章，">
@@ -169,6 +169,36 @@
 		
 	  
     
+	
+	<!-- 目录内容 -->
+
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+	<div id="toc-article" class="toc-article">
+	    <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+		<strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建网站"><span class="toc-number">1.</span> <span class="toc-text">搭建网站</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo在多台电脑上更新提交自己的博客"><span class="toc-number">2.</span> <span class="toc-text">Hexo在多台电脑上更新提交自己的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#美化自己的博客"><span class="toc-number">3.</span> <span class="toc-text">美化自己的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在hexo中引入自己的一些文件"><span class="toc-number">4.</span> <span class="toc-text">在hexo中引入自己的一些文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#给自己的域名加上Https"><span class="toc-number">5.</span> <span class="toc-text">给自己的域名加上Https</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hexo-yilia主题添加文章访问量统计"><span class="toc-number">6.</span> <span class="toc-text">hexo yilia主题添加文章访问量统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自己总结个小问题、小知识点。"><span class="toc-number">7.</span> <span class="toc-text">自己总结个小问题、小知识点。</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。"><span class="toc-number">7.1.</span> <span class="toc-text">本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。</span></a></li></ol></li></ol>
+         </div>
+   <script type="text/javascript">
+	function showToc(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:block");
+		show_toc_btn.setAttribute("style","display:none");
+		};
+	function showBtn(){
+		var toc_article = document.getElementById("toc-article");
+		var show_toc_btn = document.getElementById("show-toc-btn");
+		toc_article.setAttribute("style","display:none");
+		show_toc_btn.setAttribute("style","display:block");
+		};
+   </script>
+      
+<!-- 目录内容结束 -->
+	
+	
     <div class="article-entry" itemprop="articleBody">
       
         <p>相信经常浏览网页的朋友都会发现有许多人有自己的个人网站，这个是怎么搭建的呢？<br>笔者也是这几天摸索了一下，搭建出了自己的个人网站。有个人网站就不一样了，可以自己在上面写一些自己的笔记啥的，可以帮助我更好的学（zhuang）习（bi）。</p>
@@ -204,11 +234,11 @@
 <p><br></p>
 </li>
 <li><h3 id="自己总结个小问题、小知识点。"><a href="#自己总结个小问题、小知识点。" class="headerlink" title="自己总结个小问题、小知识点。"></a><strong>自己总结个小问题、小知识点。</strong></h3><blockquote>
-<p>&ensp;&ensp;&ensp;有时候我们写文章时，会遇到多余的标签的情况，想要删除。这种情况一般都是hexo的缓存文件引起的，在hexo的根目录，输入命令hexo clean，进行一下清理，再重新发布就行了。<br>&ensp;&ensp;&ensp;hexo g(重新编译)，hexo d(发布)</p>
+<p>&ensp;&ensp;&ensp;有时候我们写文章时，会遇到多余的标签的情况，想要删除。这种情况一般都是hexo的缓存文件引起的，在hexo的根目录，输入命令hexo clean，进行一下清理，再重新发布就行了。<br>&ensp;&ensp;&ensp;hexo g(重新编译)，hexo d(发布)<br>&ensp;&ensp;&ensp;hexo new “My new post”(新建文章)，hexo server(运行hexo)<br>&ensp;&ensp;&ensp;hexo generate(编译)，hexo deploy（发布）</p>
 </blockquote>
 </li>
 </ul>
-<h4 id="本博客只是本人记笔记用的，能力有限，上述如有错误的地方，敬请谅解。"><a href="#本博客只是本人记笔记用的，能力有限，上述如有错误的地方，敬请谅解。" class="headerlink" title="本博客只是本人记笔记用的，能力有限，上述如有错误的地方，敬请谅解。"></a><strong>本博客只是本人记笔记用的，能力有限，上述如有错误的地方，敬请谅解。</strong></h4>
+<h4 id="本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。"><a href="#本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。" class="headerlink" title="本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。"></a><strong>本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。</strong></h4>
       
 
       
@@ -224,6 +254,16 @@
                   <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
                     
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/pay/aliPay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/pay/WeChatPay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
                     
                   </div>
                 </span>
@@ -328,11 +368,15 @@
   
 <nav id="article-nav">
   
-  
-    <a href="/2018/07/31/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
-      <i class="icon-circle-right"></i>
+    <a href="/2018/08/15/读书而引发的思考/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          读书而引发的思考
+        
+      </div>
     </a>
+  
   
 </nav>
 
@@ -349,6 +393,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建网站"><span class="toc-number">1.</span> <span class="toc-text">搭建网站</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo在多台电脑上更新提交自己的博客"><span class="toc-number">2.</span> <span class="toc-text">Hexo在多台电脑上更新提交自己的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#美化自己的博客"><span class="toc-number">3.</span> <span class="toc-text">美化自己的博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在hexo中引入自己的一些文件"><span class="toc-number">4.</span> <span class="toc-text">在hexo中引入自己的一些文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#给自己的域名加上Https"><span class="toc-number">5.</span> <span class="toc-text">给自己的域名加上Https</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hexo-yilia主题添加文章访问量统计"><span class="toc-number">6.</span> <span class="toc-text">hexo yilia主题添加文章访问量统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自己总结个小问题、小知识点。"><span class="toc-number">7.</span> <span class="toc-text">自己总结个小问题、小知识点。</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。"><span class="toc-number">7.1.</span> <span class="toc-text">本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -463,6 +520,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GitHub</a>
               </li>
              
@@ -531,27 +592,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://yangjie.pro" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
+              <a href="https://zeroto.tech/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>千古不见一人闲</a>
             </li>
           
             <li class="search-li">
-              <a href="http://yangjie.pro" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
+              <a href="http://www.ityouknow.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>纯洁的微笑</a>
             </li>
           
             <li class="search-li">
-              <a href="http://yangjie.pro" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
+              <a href="http://www.cnblogs.com/stoneniqiu" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>stoneniqi</a>
             </li>
           
             <li class="search-li">
-              <a href="http://yangjie.pro" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
+              <a href="http://www.cnblogs.com/xiex" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>静儿198</a>
             </li>
           
             <li class="search-li">
-              <a href="http://yangjie.pro" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
+              <a href="http://blog.didispace.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>程序猿DD</a>
             </li>
           
             <li class="search-li">
-              <a href="http://yangjie.pro" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+              <a href="http://blog.720ui.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>梁桂钊</a>
             </li>
           
         </ul>
@@ -562,7 +623,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">坚持就是最好的信仰</div>
   	  	
     	</section>
     
