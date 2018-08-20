@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="杨杰的博客">
 <meta property="og:description" content="相信经常浏览网页的朋友都会发现有许多人有自己的个人网站，这个是怎么搭建的呢？笔者也是这几天摸索了一下，搭建出了自己的个人网站。有个人网站就不一样了，可以自己在上面写一些自己的笔记啥的，可以帮助我更好的学（zhuang）习（bi）。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-17T08:57:22.597Z">
+<meta property="og:updated_time" content="2018-08-20T01:55:31.788Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何搭建个人网站">
 <meta name="twitter:description" content="相信经常浏览网页的朋友都会发现有许多人有自己的个人网站，这个是怎么搭建的呢？笔者也是这几天摸索了一下，搭建出了自己的个人网站。有个人网站就不一样了，可以自己在上面写一些自己的笔记啥的，可以帮助我更好的学（zhuang）习（bi）。">
@@ -244,16 +244,17 @@
 </li>
 <li><h3 id="给自己的网站添加可爱的萌妹子或者萌宠"><a href="#给自己的网站添加可爱的萌妹子或者萌宠" class="headerlink" title="给自己的网站添加可爱的萌妹子或者萌宠"></a><strong>给自己的网站添加可爱的萌妹子或者萌宠</strong></h3>&ensp;&ensp;&ensp;我也是在偶然间，看到别人的网站上有个可爱的萌妹子，发现挺好玩的，就自己也试着整了一个。    <h4 id="安装相应配件"><a href="#安装相应配件" class="headerlink" title="安装相应配件"></a>安装相应配件</h4>在<strong>hexo</strong>根目录执行下面的命令<br><code>npm install --save hexo-helper-live2d</code>  <h4 id="增加下面的配置"><a href="#增加下面的配置" class="headerlink" title="增加下面的配置"></a>增加下面的配置</h4>在hexo的根目录里的<strong>_config.yml</strong>中添加如下配置 </li>
 </ul>
-<pre><code class="live2d:">enable: true
-scriptFrom: local
-model:
-  use: live2d-widget-model-wanko
-display:
-  position: right
-  width: 150
-  height: 300
-mobile:
-  show: true
+<pre><code class="YAML"><span class="attr">live2d:</span>
+<span class="attr"> enable:</span> <span class="literal">true</span>
+<span class="attr"> scriptFrom:</span> <span class="string">local</span>
+<span class="attr"> model:</span>
+<span class="attr">   use:</span> <span class="string">live2d-widget-model-wanko</span>
+<span class="attr"> display:</span>
+<span class="attr">   position:</span> <span class="string">right</span>
+<span class="attr">   width:</span> <span class="number">150</span>
+<span class="attr">   height:</span> <span class="number">300</span>
+<span class="attr"> mobile:</span>
+<span class="attr">   show:</span> <span class="literal">true</span>
 </code></pre>
 <p><strong>use</strong>就是配置的模型，现在有很多的模型可以选择。到时根据下面的网址，去下载相应的模型，然后更改<strong>use</strong>后面的模型名称即可。  </p>
 <blockquote>
@@ -565,6 +566,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GitHub</a>
               </li>
              
@@ -582,10 +587,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
