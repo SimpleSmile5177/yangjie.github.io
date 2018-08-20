@@ -9,14 +9,14 @@
   <title>还在为系统容易挂而担心，不如来这里看看 | 杨杰的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="让人头疼的系统相信做程序的人都知道，自己所管理的系统要是突然挂了，得多让人崩溃。领导一个电话过来，不管自己身处何方，掏出随身携带的笔记本就开始修复问题。系统挂掉的原因有很多，所以在系统挂掉的时候，快速找到导致错误的原因，才能快速的完美修复问题。">
-<meta name="keywords" content="线程日志,GC日志,高并发">
+<meta name="keywords" content="线程日志,GC日志,高并发,linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="还在为系统容易挂而担心，不如来这里看看">
 <meta property="og:url" content="https://www.yangjie.pro/2018/08/16/还在为系统容易挂而担心，不如来这里看看/index.html">
 <meta property="og:site_name" content="杨杰的博客">
 <meta property="og:description" content="让人头疼的系统相信做程序的人都知道，自己所管理的系统要是突然挂了，得多让人崩溃。领导一个电话过来，不管自己身处何方，掏出随身携带的笔记本就开始修复问题。系统挂掉的原因有很多，所以在系统挂掉的时候，快速找到导致错误的原因，才能快速的完美修复问题。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-17T06:07:46.491Z">
+<meta property="og:updated_time" content="2018-08-20T02:24:47.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="还在为系统容易挂而担心，不如来这里看看">
 <meta name="twitter:description" content="让人头疼的系统相信做程序的人都知道，自己所管理的系统要是突然挂了，得多让人崩溃。领导一个电话过来，不管自己身处何方，掏出随身携带的笔记本就开始修复问题。系统挂掉的原因有很多，所以在系统挂掉的时候，快速找到导致错误的原因，才能快速的完美修复问题。">
@@ -187,7 +187,7 @@
 	<div id="toc-article" class="toc-article">
 	    <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 		<strong class="toc-title">文章目录</strong>
-           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#让人头疼的系统"><span class="toc-number">1.</span> <span class="toc-text">让人头疼的系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#好用的工具"><span class="toc-number">2.</span> <span class="toc-text">好用的工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程日志分析"><span class="toc-number">2.1.</span> <span class="toc-text">线程日志分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GC日志分析"><span class="toc-number">2.2.</span> <span class="toc-text">GC日志分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决高并发下的问题"><span class="toc-number">2.3.</span> <span class="toc-text">解决高并发下的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。"><span class="toc-number">2.3.0.1.</span> <span class="toc-text">本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。</span></a></li></ol></li></ol></li></ol></li></ol>
+           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#让人头疼的系统"><span class="toc-number">1.</span> <span class="toc-text">让人头疼的系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#好用的工具"><span class="toc-number">2.</span> <span class="toc-text">好用的工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程日志分析"><span class="toc-number">2.1.</span> <span class="toc-text">线程日志分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GC日志分析"><span class="toc-number">2.2.</span> <span class="toc-text">GC日志分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决高并发下的问题"><span class="toc-number">2.3.</span> <span class="toc-text">解决高并发下的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM进程CPU占用率高于100"><span class="toc-number">2.4.</span> <span class="toc-text">JVM进程CPU占用率高于100%</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。"><span class="toc-number">2.4.0.1.</span> <span class="toc-text">本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。</span></a></li></ol></li></ol></li></ol></li></ol>
          </div>
    <script type="text/javascript">
 	function showToc(){
@@ -217,6 +217,9 @@
 <p> <strong> <a href="http://gceasy.io/" target="_blank" rel="noopener">http://gceasy.io/</a> </strong>  </p>
 <h2 id="解决高并发下的问题"><a href="#解决高并发下的问题" class="headerlink" title="解决高并发下的问题"></a>解决高并发下的问题</h2><blockquote>
 <p><a href="http://www.cnblogs.com/softidea/p/6229543.html" target="_blank" rel="noopener">在高并发的情况下，我们可以通关系统限流的方案，来解决高并发带来的一些问题。</a>  </p>
+</blockquote>
+<h2 id="JVM进程CPU占用率高于100"><a href="#JVM进程CPU占用率高于100" class="headerlink" title="JVM进程CPU占用率高于100%"></a>JVM进程CPU占用率高于100%</h2><blockquote>
+<p><a href="https://blog.csdn.net/flysqrlboy/article/details/79314521" target="_blank" rel="noopener">作为开发，相信也碰到过jvm进程一直居高不下的情况，所以找到出错的地方还是最重要的。</a>  </p>
 </blockquote>
 <h4 id="本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。"><a href="#本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。" class="headerlink" title="本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。"></a><strong>本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。</strong></h4>
       
@@ -271,6 +274,10 @@
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">高并发</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
         		</li>
       		
 		</ul>
@@ -378,7 +385,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#让人头疼的系统"><span class="toc-number">1.</span> <span class="toc-text">让人头疼的系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#好用的工具"><span class="toc-number">2.</span> <span class="toc-text">好用的工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程日志分析"><span class="toc-number">2.1.</span> <span class="toc-text">线程日志分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GC日志分析"><span class="toc-number">2.2.</span> <span class="toc-text">GC日志分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决高并发下的问题"><span class="toc-number">2.3.</span> <span class="toc-text">解决高并发下的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。"><span class="toc-number">2.3.0.1.</span> <span class="toc-text">本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#让人头疼的系统"><span class="toc-number">1.</span> <span class="toc-text">让人头疼的系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#好用的工具"><span class="toc-number">2.</span> <span class="toc-text">好用的工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程日志分析"><span class="toc-number">2.1.</span> <span class="toc-text">线程日志分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GC日志分析"><span class="toc-number">2.2.</span> <span class="toc-text">GC日志分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决高并发下的问题"><span class="toc-number">2.3.</span> <span class="toc-text">解决高并发下的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM进程CPU占用率高于100"><span class="toc-number">2.4.</span> <span class="toc-text">JVM进程CPU占用率高于100%</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。"><span class="toc-number">2.4.0.1.</span> <span class="toc-text">本博客只是本人记笔记使用，能力有限，上述如有错误或不足的地方，敬请谅解。</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -547,6 +554,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">高并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
             
             <div class="clearfix"></div>
