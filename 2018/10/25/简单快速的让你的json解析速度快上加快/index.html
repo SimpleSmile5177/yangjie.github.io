@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20181025204402628.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20181025204441424.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20181025204512641.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2018-10-25T13:11:35.743Z">
+<meta property="og:updated_time" content="2018-10-25T13:37:23.958Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单快速的让你的json解析速度快上加快">
 <meta name="twitter:description" content="背景最近小编在做公司的一个需求。要求是把系统内的一些大型文本文件上传到第三方那里，而且第三方要求的交互数据的方式是采用post请求发送json串的形式进行的。">
@@ -242,10 +242,16 @@ tpwidget("show");</script>
 	
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近小编在做公司的一个需求。要求是把系统内的一些大型文本文件上传到第三方那里，而且第三方要求的交互数据的方式是采用post请求发送json串的形式进行的。 </p>
+        <p><meta name="referrer" content="no-referrer"></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近小编在做公司的一个需求。要求是把系统内的一些大型文本文件上传到第三方那里，而且第三方要求的交互数据的方式是采用post请求发送json串的形式进行的。 </p>
 <a id="more"></a> 
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>做到中途才发现问题，由于单个文本都有一两兆的大小，一次请求要传四五个文件，这些文件内容和其它要传输的参数加起来就有七八兆了。<br>当时我是用的最常用的json解析的方法，就是下图所用的jar里面的方法。<br><img src="https://img-blog.csdnimg.cn/20181025204147984.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70" alt="哎呀，图片跑丢了！"><br>现在，我做个测试。我桌面上有个三兆多的json字符串的文件，我读取这个文件，并把文件内容用<strong>JSONObject.fromObject</strong>方法去解析它。<br><img src="https://img-blog.csdnimg.cn/20181025204301865.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70" alt="哎呀，图片跑丢了！"><br>运行得到的结果如下：<br><img src="https://img-blog.csdnimg.cn/20181025204402628.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70" alt="哎呀，图片跑丢了！"><br>三兆的文件，所用了三百多毫秒。我真实项目里为了组装数据，还得互相嵌套集合，最后是把那个装满数据的集合解析成json串，这时的速度特别慢，至少有五六秒的时间。  </p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>了解决json解析慢的问题，我上网查了些资料，找到了一款新的json解析的工具，<strong>就是阿里的一位大神写的解析json的工具，叫FastJson</strong>，速度比原来的相比，快了一大截。<br><img src="https://img-blog.csdnimg.cn/20181025204441424.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70" alt="哎呀，图片跑丢了！"><br>用了<strong>FastJson</strong>解析的用时如下：<br><img src="https://img-blog.csdnimg.cn/20181025204512641.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70" alt="哎呀，图片跑丢了！"><br>可以看到，快了一倍，这在处理多文件上传时能节省不少的时间。  </p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>做到中途才发现问题，由于单个文本都有一两兆的大小，一次请求要传四五个文件，这些文件内容和其它要传输的参数加起来就有七八兆了。<br>当时我是用的最常用的json解析的方法，就是下图所用的jar里面的方法。<br><img src="https://img-blog.csdnimg.cn/20181025204147984.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70" alt="哎呀，图片跑丢了！">  </p>
+<p>现在，我做个测试。我桌面上有个三兆多的json字符串的文件，我读取这个文件，并把文件内容用<strong>JSONObject.fromObject</strong>方法去解析它。<br><img src="https://img-blog.csdnimg.cn/20181025204301865.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70" alt="哎呀，图片跑丢了！">  </p>
+<p>运行得到的结果如下：<br><img src="https://img-blog.csdnimg.cn/20181025204402628.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70" alt="哎呀，图片跑丢了！">  </p>
+<p>三兆的文件，所用了三百多毫秒。我真实项目里为了组装数据，还得互相嵌套集合，最后是把那个装满数据的集合解析成json串，这时的速度特别慢，至少有五六秒的时间。  </p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>了解决json解析慢的问题，我上网查了些资料，找到了一款新的json解析的工具，<strong>就是阿里的一位大神写的解析json的工具，叫FastJson</strong>，速度比原来的相比，快了一大截。<br><img src="https://img-blog.csdnimg.cn/20181025204441424.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70" alt="哎呀，图片跑丢了！">这是我用的fastjson版本  </p>
+<p>用了<strong>FastJson</strong>解析的用时如下：<br><img src="https://img-blog.csdnimg.cn/20181025204512641.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NzUxOTkw,size_27,color_FFFFFF,t_70" alt="哎呀，图片跑丢了！">  </p>
+<p>可以看到，快了一倍，这在处理多文件上传时能节省不少的时间。  </p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p><strong>下篇文章我就整理下FastJson的一些基本用法，供大家参考。</strong></p>
 
       
@@ -540,11 +546,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Ehcache</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">Ehcache</a>
               </li>
              
               <li class="article-tag-list-item">
