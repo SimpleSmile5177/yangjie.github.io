@@ -6,9 +6,10 @@ toc: true
 tags: Ehcache
 ---
 
+<meta name="referrer" content="no-referrer" />
 ## ehcache的简介   
 EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点，是Hibernate中默认的CacheProvider。  
-
+  
 <!--more--> 
 ## ehcache入门实例  
 **1.首先先导入ehcache相关的jar依赖，我这里有的是maven项目做得演示，所以要在pom.xml里面添加依赖。**  
