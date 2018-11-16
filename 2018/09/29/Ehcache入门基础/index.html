@@ -5,6 +5,7 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <!--<meta name="referrer" content="no-referrer" />-->
   <meta name="baidu-site-verification" content="1bbQ6kS3lP" />
   <link rel="dns-prefetch" href="https://www.yangjie.pro">
   <title>Ehcache入门基础 | 杨杰的博客</title>
@@ -17,12 +18,12 @@
 <meta property="og:site_name" content="杨杰的博客">
 <meta property="og:description" content="ehcache的简介EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点，是Hibernate中默认的CacheProvider。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://images2018.cnblogs.com/blog/1142546/201802/1142546-20180228135419211-541871724.png">
-<meta property="og:updated_time" content="2018-10-25T13:35:09.054Z">
+<meta property="og:image" content="https://www.yangjie.pro/2018/09/29/Ehcache入门基础/ehcache运行结果.png">
+<meta property="og:updated_time" content="2018-11-16T07:51:52.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ehcache入门基础">
 <meta name="twitter:description" content="ehcache的简介EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点，是Hibernate中默认的CacheProvider。">
-<meta name="twitter:image" content="https://images2018.cnblogs.com/blog/1142546/201802/1142546-20180228135419211-541871724.png">
+<meta name="twitter:image" content="https://www.yangjie.pro/2018/09/29/Ehcache入门基础/ehcache运行结果.png">
   
     <link rel="alternative" href="/atom.xml" title="杨杰的博客" type="application/atom+xml">
   
@@ -238,13 +239,12 @@ tpwidget("show");</script>
 	
     <div class="article-entry" itemprop="articleBody">
       
-        <p><meta name="referrer" content="no-referrer"></p>
-<h2 id="ehcache的简介"><a href="#ehcache的简介" class="headerlink" title="ehcache的简介"></a>ehcache的简介</h2><p>EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点，是Hibernate中默认的CacheProvider。  </p>
+        <h2 id="ehcache的简介"><a href="#ehcache的简介" class="headerlink" title="ehcache的简介"></a>ehcache的简介</h2><p>EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点，是Hibernate中默认的CacheProvider。  </p>
 <a id="more"></a> 
 <h2 id="ehcache入门实例"><a href="#ehcache入门实例" class="headerlink" title="ehcache入门实例"></a>ehcache入门实例</h2><p><strong>1.首先先导入ehcache相关的jar依赖，我这里有的是maven项目做得演示，所以要在pom.xml里面添加依赖。</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.ehcache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.10.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>2.创建配置文件 ehcache.xml,ehcache在启动的时候会默认去classpath根目录下找名为ehcache.xml的文件，也可以放在其他位置，使用时指明即可。为了方便，这次就在src/main/resources/创建一个配置文件 ehcache.xml。</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;  </span><br><span class="line"><span class="tag">&lt;<span class="name">ehcache</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>  </span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:noNamespaceSchemaLocation</span>=<span class="string">"http://ehcache.org/ehcache.xsd"</span>&gt;</span>  </span><br><span class="line">  <span class="comment">&lt;!-- 磁盘缓存位置 --&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">diskStore</span> <span class="attr">path</span>=<span class="string">"java.io.tmpdir/ehcache"</span>/&gt;</span>  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">&lt;!-- 默认缓存 --&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">defaultCache</span>  </span></span><br><span class="line"><span class="tag">          <span class="attr">maxEntriesLocalHeap</span>=<span class="string">"10000"</span>  </span></span><br><span class="line"><span class="tag">          <span class="attr">eternal</span>=<span class="string">"false"</span>  </span></span><br><span class="line"><span class="tag">          <span class="attr">timeToIdleSeconds</span>=<span class="string">"120"</span>  </span></span><br><span class="line"><span class="tag">          <span class="attr">timeToLiveSeconds</span>=<span class="string">"120"</span>  </span></span><br><span class="line"><span class="tag">          <span class="attr">maxEntriesLocalDisk</span>=<span class="string">"10000000"</span>  </span></span><br><span class="line"><span class="tag">          <span class="attr">diskExpiryThreadIntervalSeconds</span>=<span class="string">"120"</span>  </span></span><br><span class="line"><span class="tag">          <span class="attr">memoryStoreEvictionPolicy</span>=<span class="string">"LRU"</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">persistence</span> <span class="attr">strategy</span>=<span class="string">"localTempSwap"</span>/&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;/<span class="name">defaultCache</span>&gt;</span>  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">&lt;!-- helloworld缓存 --&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">cache</span> <span class="attr">name</span>=<span class="string">"HelloWorldCache"</span>  </span></span><br><span class="line"><span class="tag">         <span class="attr">maxElementsInMemory</span>=<span class="string">"1000"</span>  </span></span><br><span class="line"><span class="tag">         <span class="attr">eternal</span>=<span class="string">"false"</span>  </span></span><br><span class="line"><span class="tag">         <span class="attr">timeToIdleSeconds</span>=<span class="string">"100"</span>  </span></span><br><span class="line"><span class="tag">         <span class="attr">timeToLiveSeconds</span>=<span class="string">"100"</span>  </span></span><br><span class="line"><span class="tag">         <span class="attr">overflowToDisk</span>=<span class="string">"false"</span>  </span></span><br><span class="line"><span class="tag">         <span class="attr">memoryStoreEvictionPolicy</span>=<span class="string">"LRU"</span>/&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">ehcache</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>3.测试类</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.hz.demo;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> net.sf.ehcache.Cache;  </span><br><span class="line"><span class="keyword">import</span> net.sf.ehcache.CacheManager;  </span><br><span class="line"><span class="keyword">import</span> net.sf.ehcache.Element;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EhcacheTest1</span> </span>&#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        <span class="comment">// 1. 创建缓存管理器  </span></span><br><span class="line">            CacheManager cacheManager = CacheManager.create();  </span><br><span class="line">            <span class="comment">// 2. 获取缓存对象  </span></span><br><span class="line">            Cache cache = cacheManager.getCache(<span class="string">"HelloWorldCache"</span>);  </span><br><span class="line">            <span class="comment">// 3. 创建元素  </span></span><br><span class="line">            Element element = <span class="keyword">new</span> Element(<span class="string">"key1"</span>, <span class="string">"HelleWorld"</span>);  </span><br><span class="line">            <span class="comment">// 4. 将元素添加到缓存  </span></span><br><span class="line">            cache.put(element);  </span><br><span class="line">            <span class="comment">// 5. 获取缓存  </span></span><br><span class="line">            Element value = cache.get(<span class="string">"key1"</span>);  </span><br><span class="line">            <span class="comment">// 6.输出缓存中的值  </span></span><br><span class="line">            System.out.println(<span class="string">"key1="</span>+value.getObjectValue());  </span><br><span class="line">            <span class="comment">// 7.删除缓存中的值  </span></span><br><span class="line">            cache.remove(<span class="string">"key1"</span>);  </span><br><span class="line">            <span class="comment">// 8. 刷新缓存  </span></span><br><span class="line">            cache.flush();  </span><br><span class="line">            <span class="comment">// 9. 关闭缓存管理器  </span></span><br><span class="line">            cacheManager.shutdown();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>4.输出结果</strong><br><img src="https://images2018.cnblogs.com/blog/1142546/201802/1142546-20180228135419211-541871724.png" alt="哎呀，图片跑丢了"></p>
+<p><strong>4.输出结果</strong><br><img src="/2018/09/29/Ehcache入门基础/ehcache运行结果.png" alt="哎呀，图片跑丢了"></p>
 
       
 
@@ -547,11 +547,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Ehcache</a>
+                <a href="javascript:void(0)" class="js-tag color2">GitHub</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">域名</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">NodeJs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Ehcache</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -579,31 +595,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">FastJSON</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">GitHub</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">域名</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">NodeJs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">FastJSON</a>
               </li>
              
               <li class="article-tag-list-item">
