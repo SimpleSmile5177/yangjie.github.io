@@ -6,7 +6,6 @@ toc: true
 tags: Ehcache
 ---
 
-<meta name="referrer" content="no-referrer" />
 ## ehcache的简介   
 EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点，是Hibernate中默认的CacheProvider。  
   
@@ -86,4 +85,4 @@ public class EhcacheTest1 {
 ```
   
 **4.输出结果**  
-![哎呀，图片跑丢了](https://images2018.cnblogs.com/blog/1142546/201802/1142546-20180228135419211-541871724.png)
+![哎呀，图片跑丢了](Ehcache入门基础/ehcache运行结果.png)
