@@ -4,8 +4,25 @@
 
     
   <url>
+    <loc>https://www.yangjie.pro/2019/07/23/mysql%E8%BF%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%AD%90%E8%A1%A8%E6%97%A0%E6%95%B0%E6%8D%AE%E5%AF%BC%E8%87%B4%E4%B8%BB%E8%A1%A8%E6%9F%A5%E4%B8%8D%E5%87%BA%E6%95%B0%E6%8D%AE/</loc>
+    <lastmod>2020-05-23T05:44:20.959Z</lastmod>
+    <data>
+        <display>
+        <title>mysql连表查询子表无数据导致主表查不出数据</title>
+        <pubTime>2019-07-23T05:20:22.000Z</pubTime>
+        
+        <tag>mysql</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://www.yangjie.pro/2019/06/16/mysql%E7%94%9F%E6%88%90%E7%9A%84uuid%E5%8F%91%E7%94%9F%E9%87%8D%E5%A4%8D%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
-    <lastmod>2020-05-16T08:29:54.147Z</lastmod>
+    <lastmod>2020-05-23T04:50:59.104Z</lastmod>
     <data>
         <display>
         <title>mysql生成的uuid发生重复解决办法</title>
